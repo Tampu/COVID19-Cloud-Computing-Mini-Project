@@ -44,11 +44,12 @@ sudo docker run -p 443:443 cassandrarest:v1
 # REST-based services served by the App
 1. GET 
 
-##### Request
+
 ```GET /
 https://ec2-54-92-130-85.compute-1.amazonaws.com/covid
 ```
-##### Response
+Response:
+
 A list of all countries and their covid statistics
 ```
 [
@@ -74,7 +75,7 @@ curl -k -i -H "Content-Type: application/json" -X POST -d '{"country":"NewCountr
 
 ```
 
-Repsonse:
+Response:
 
 ```
 HTTP/1.0 201 CREATED
@@ -96,7 +97,7 @@ curl -k -i -H "Content-Type: application/json" -X PUT -d '{"country":"NewCountry
 
 ```
 
-Repsonse:
+Response:
 
 ```
 HTTP/1.0 200 OK
@@ -117,7 +118,7 @@ curl -k -i -H "Content-Type: application/json" -X DELETE -d '{"country":"NewCoun
 
 ```
 
-Repsonse:
+Response:
 ```
 HTTP/1.0 200 OK
 Content-Type: application/json
@@ -161,4 +162,35 @@ Email Address []:
 To use this new self-signed certificate in Flask application,ssl_context argument in app.run() is set with a tuple consisting of the certificate and private key files along with port=443.
 [Learn more](https://blog.miguelgrinberg.com/post/running-your-flask-application-over-https)
 
+## Load Balancing service : Kubernetes
+Kubernetes is a portable, extensible, open-source platform for managing containerized workloads and services, that facilitates both declarative configuration and automation. It has a large, rapidly growing ecosystem.It gives Pods their own IP addresses and a single DNS name for a set of Pods, and can load-balance across them.
 
+Install Kubernetes
+```
+sudo snap install microk8s --classic
+```
+
+  1. Build cassandra-image 
+  ```
+  sudo microk8s enable registry #to enable registry
+  sudo docker build . -t localhost:32000/cassandra-test:registry #To build and tag cassandra image
+  ```
+  2. Push to registry
+  ```
+  sudo docker push localhost:32000/cassandra-test # To push it to the registry
+  ```
+  3.Restart and start docker again
+  ````
+  sudo systemctl restart docker 
+  sudo docker start cassandra-test
+  ````
+  4.Configure the deploy.yaml file
+  ```
+  sudo nano deploy.yaml 
+  ```
+  5.Deploy the docker container image present in the registry 
+  ```
+  sudo microk8s.kubectl apply -f ./dev.yaml # To deploy
+  sudo microk8s kubectl expose deployment app-deployment --type=LoadBalancer --port=443 --target-port=443
+```
+[Learn more](https://kubernetes.io/)
