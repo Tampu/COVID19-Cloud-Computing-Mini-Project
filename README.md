@@ -2,7 +2,7 @@
 
 ##                                             COVID-19 TRACKER WEB APPLICATION
 
-This Covid-19 Tracker web application is a prototype of a Cloud Application developed in Python and Flask where one can use GET, POST, PUT and DELETE methods to interact with the application. It functions as an easy-to-use app which allows its users to access the Coronovirus World Count of New Confirmed Cases, New Deaths, New Recovered Cases in each country which gets updated everyday.It is a REST-based service interface and makes use of an external REST service being the Covid19 API (https://covid19api.com/) in order to fill the covid stats table. The REST API responses conform to REST standards.
+This COVID-19 Tracker web application is a prototype of a Cloud Application developed in Python and Flask where one can use GET, POST, PUT and DELETE methods to interact with the application. It functions as an easy-to-use app which allows its users to access the Coronovirus World Count of New Confirmed Cases, New Deaths, New Recovered Cases in each country which gets updated everyday.It is a REST-based service interface and makes use of an external REST service being the Covid19 API (https://covid19api.com/) in order to fill the covid stats table. The REST API responses conform to REST standards.
 
 Additionally, it makes use of a Cloud database in Apache Cassandra, the free and open-source NoSQL database management system. This is where a table of the covid statistics is stored and managed. See details of set-up below.
 
@@ -163,7 +163,7 @@ To use this new self-signed certificate in Flask application,ssl_context argumen
 [Learn more](https://blog.miguelgrinberg.com/post/running-your-flask-application-over-https)
 
 ## Load Balancing service : Kubernetes
-Kubernetes is a portable, extensible, open-source platform for managing containerized workloads and services, that facilitates both declarative configuration and automation. It has a large, rapidly growing ecosystem.It gives Pods their own IP addresses and a single DNS name for a set of Pods, and can load-balance across them.
+Kubernetes is a portable, extensible, open-source platform for managing containerized workloads and services, that facilitates both declarative configuration and automation. It has a large, rapidly growing ecosystem.It gives Pods their own IP addresses and a single DNS name for a set of Pods, and can load-balance across them.[Learn more](https://kubernetes.io/)
 
 Install Kubernetes
 ```
@@ -179,18 +179,33 @@ sudo snap install microk8s --classic
   ```
   sudo docker push localhost:32000/cassandra-test # To push it to the registry
   ```
-  3.Restart and start docker again
+  3. Restart and start docker again
   ````
   sudo systemctl restart docker 
   sudo docker start cassandra-test
   ````
-  4.Configure the deploy.yaml file
+  4. Configure the deploy.yaml file
   ```
   sudo nano deploy.yaml 
   ```
-  5.Deploy the docker container image present in the registry 
+  5. Deploy the docker container image present in the registry 
   ```
-  sudo microk8s.kubectl apply -f ./dev.yaml # To deploy
-  sudo microk8s kubectl expose deployment app-deployment --type=LoadBalancer --port=443 --target-port=443
-```
-[Learn more](https://kubernetes.io/)
+  sudo microk8s kubectl apply -f deploy.yaml
+  sudo microk8s kubectl expose deployment covidapp-deployment --type=LoadBalancer --port=443 --target-port=443
+  ```
+  6. Check services for the IP address
+  ```
+  sudo microk8s kubectl get services
+  ```
+
+## Built With
+
+* [Cassandra](http://cassandra.apache.org/doc/latest/) - Database used
+* [Flask](http://flask.pocoo.org/docs/1.0/) - Web framework used
+* [COVID19](https://covid19api.com/) - External API used
+* [Kubernetes](https://kubernetes.io/docs/tasks/access-application-cluster/create-external-load-balancer/) - Load balancing & Scaling
+* [Security](https://blog.miguelgrinberg.com/post/running-your-flask-application-over-https) - SSL Certificates
+
+## Authors
+
+**Tampu Ravi Kumar** [Tampu](https://github.com/Tampu/COVID19-Cloud-Computing-Mini-Project)
