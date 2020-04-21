@@ -35,17 +35,7 @@ def startapp():
             flash(f'Country: {country}\n NewConfirmed: {newconfirmed}\n NewDeaths: {newdeaths} \nNewRecovered: {newrecovered}')
             session.execute(f"INSERT INTO covid.stats(country,newconfirmed,newdeaths,newrecovered) VALUES('{country}',{newconfirmed},{newdeaths},{newrecovered});")
                 
-        #     for i in range(0,num_countries):
-
-        
-        # if str(data['Country']) != "":
-        #         country = data['Slug']
-        #         newconfirmed = data['NewConfirmed']
-        #         newdeaths = data['NewDeaths']
-        #         newrecovered = data['NewRecovered']
-        #         flash(f'Country: {country}\n NewConfirmed: {newconfirmed}\n NewDeaths: {newdeaths} \nNewRecovered: {newrecovered}')
-        #         session.execute(f"INSERT INTO covid.stats(country,newconfirmed,newdeaths,newrecovered) VALUES('{country}',{newconfirmed},{newdeaths},{newrecovered});")
-        else:
+         else:
             print(resp.reason)    
     return render_template('index.html', form=form)
 @app.route('/covid', methods=['GET'])
