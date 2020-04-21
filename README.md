@@ -10,16 +10,16 @@ Finally, cloud security measures have been implemented. The application is serve
 
 Please use the requirements.txt file for all the packages and specific versions used to build this application.
 
-# Getting Started
-These instructions with give a copy of this project for the reader to use if for development and testing.
-1) 
-
-
 # Interacting with the Web Application
 **Accessing the Root URL**: 
 `@app.route("/", methods=['GET', 'POST'])`
 
-Directs the user to the "Covid-19 Tracker" page which allows users to browse the Coronovirus World Count data countrywise. The user needs to input the country name inorder to get the count in that particular country.
+Directs the user to the "Covid-19 Tracker" page which allows user to browse the Coronovirus World Count data countrywise. The user needs to input the country name inorder to get the count in that particular country.
+Application demo
+
+![img](/appdemo.PNG)
+
+
 
 
 
