@@ -10,6 +10,8 @@ Finally, cloud security measures have been implemented. The application is serve
 
 Please use the requirements.txt file for all the packages and specific versions used to build this application.
 
+#### Referred to this blog : https://blog.ruanbekker.com/blog/2018/05/27/web-forms-with-python-flask-and-the-wtforms-module-with-bootstrap/ for webpage and HTML template code
+
 # About COVID-19 Tracker Application 
 
 Index.html is created inside a templates folder. 
